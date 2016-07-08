@@ -1,16 +1,29 @@
 import asyncio
 import discord
 from config import config
+
 bot = discord.Client()
+
+first_time = True
 
 @bot.async_event
 async def on_ready():
-     print('connected!')
+    data = []
+    user_token = input()
+    print(user_token)
+    data.append(user_token)
+    user_id = input()
+    print(user_id)
+    data.append(user_id)
+    print(data)
+    config.writeCredentials(data)
+    print(first_time)
+    print('connected!')
 
 
 async def say_hi(author, message):
     print('saying hi')
-    await bot.send_message(message.channel, "Hi!")
+    await bot.send_message(message.channel, "Hi! %s" % author)
 
 @bot.async_event
 async def on_message(message):
@@ -28,8 +41,7 @@ async def on_message(message):
     # return
 
 
-
-try:
-    bot.run(config.token)
-except:
-    print('invalid token')
+    try:
+        bot.run(config.token)
+    except:
+        print('invalid token')
