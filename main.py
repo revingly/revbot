@@ -1,6 +1,6 @@
 import asyncio
 import discord
-from config import config
+from config.config import config
 
 bot = discord.Client()
 
